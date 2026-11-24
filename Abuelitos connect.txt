@@ -1,0 +1,590 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abuelitos Connect 💗</title>
+<style>
+:root {
+  --pink:#f5b8cb;
+  --pink2:#fff0f5;
+  --purple:#8064b7;
+  --purple2:#eee6ff;
+  --text:#40344f;
+  --green:#dff3e6;
+  --white:#fff;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Trebuchet MS",Arial,sans-serif;
+  background:linear-gradient(135deg,#fff6f9,#f5f0ff,#fffaf0);
+  color:var(--text);
+  font-size:18px;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;transition:.2s}
+button:hover{transform:translateY(-2px);filter:brightness(.98)}
+button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:3px solid #d98b28;outline-offset:3px
+}
+header{
+  padding:22px 5%;
+  background:linear-gradient(110deg,#f8c6d6,#e4d9ff);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;
+  border-bottom:1px solid #ffffff;
+}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{
+  width:60px;height:60px;display:grid;place-items:center;
+  border-radius:20px;background:#fff9;font-size:35px;
+  box-shadow:0 5px 15px #86649b20
+}
+.brand h1{margin:0;font-size:clamp(22px,3vw,32px);color:#604786}
+.brand p{margin:3px 0 0;font-size:14px}
+.header-tools{display:flex;gap:8px;flex-wrap:wrap}
+.header-tools button,.nav button{
+  border:0;border-radius:13px;padding:12px 15px;
+  background:#fff;color:#634c8d;font-weight:bold
+}
+.layout{
+  display:grid;grid-template-columns:230px minmax(0,1fr);
+  max-width:1450px;margin:auto;min-height:80vh
+}
+aside{
+  padding:22px 15px;background:#ffffffa8;
+  border-right:1px solid #e9def2
+}
+.mini-profile{
+  background:white;padding:15px;border-radius:18px;
+  display:flex;align-items:center;gap:12px;margin-bottom:20px
+}
+.avatar{
+  width:54px;height:54px;flex-shrink:0;border-radius:50%;
+  display:grid;place-items:center;background:#f8d6e4;font-size:30px
+}
+.mini-profile strong,.mini-profile small{display:block}
+.mini-profile small{color:#796e85;font-size:13px}
+.nav{display:grid;gap:9px}
+.nav button{
+  text-align:left;background:transparent;font-size:17px;
+  min-height:52px
+}
+.nav button.active,.nav button:hover{background:#eae0fc}
+.side-note{
+  margin-top:25px;background:#fff0f5;padding:15px;
+  border-radius:16px;font-size:14px
+}
+main{padding:clamp(15px,3vw,35px);min-width:0}
+.page{display:none;animation:appear .25s ease}
+.page.active{display:block}
+@keyframes appear{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:none}}
+.hero{
+  min-height:230px;padding:clamp(22px,4vw,40px);
+  border-radius:27px;display:flex;justify-content:space-between;
+  align-items:center;gap:15px;overflow:hidden;position:relative;
+  background:linear-gradient(115deg,#f9d7e4,#e7ddff)
+}
+.hero h2{font-size:clamp(27px,4vw,42px);margin:8px 0;color:#624784}
+.hero p{font-size:19px;max-width:530px}
+.eyebrow{letter-spacing:2px;font-size:12px;font-weight:bold;color:#9c608a}
+.hero-art{font-size:90px;min-width:130px;text-align:center;
+  filter:drop-shadow(0 9px 12px #a87ca522)}
+h2{color:#634b8b}
+.section-title{margin:28px 0 16px}
+.section-title h2{margin-bottom:5px}
+.section-title p{margin-top:0;color:#776b83}
+.grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px
+}
+.feature{
+  border:0;border-radius:22px;padding:22px;text-align:left;
+  color:var(--text);min-height:155px;box-shadow:0 7px 22px #4e3d6410
+}
+.feature .big-icon{font-size:37px;display:block;margin-bottom:10px}
+.feature strong{display:block;font-size:21px;margin-bottom:6px}
+.feature span:last-child{font-size:15px}
+.pink{background:#fbe0e9}
+.lilac{background:#ece4ff}
+.mint{background:#e0f3e6}
+.cream{background:#fff0d6}
+.card{
+  padding:22px;background:#fff;border:1px solid #eee5f3;
+  border-radius:22px;box-shadow:0 7px 24px #5c46730c;
+  margin-top:18px
+}
+.two-cols{display:grid;grid-template-columns:1.2fr .8fr;gap:17px}
+.friend{
+  display:flex;align-items:center;gap:12px;padding:12px 0;
+  border-bottom:1px solid #f0eaf4
+}
+.friend:last-child{border:0}
+.friend-info{flex:1;min-width:0}
+.friend-info strong,.friend-info small{display:block}
+.friend-info small{color:#7a6e85;font-size:14px}
+.btn{
+  border:0;border-radius:13px;padding:12px 17px;
+  background:var(--purple);color:white;font-weight:bold;
+  min-height:46px
+}
+.btn-light{background:#eee6ff;color:#60468b}
+.btn-pink{background:#f5b8cb;color:#59364a}
+.btn-red{background:#b93d59;color:white}
+.btn-green{background:#dff3e6;color:#286844}
+.full{width:100%}
+form label{display:block;font-weight:bold;margin:15px 0 6px}
+input:not([type=checkbox]),select,textarea{
+  width:100%;padding:13px;border:1px solid #dcd0e8;
+  border-radius:12px;background:white;color:var(--text);
+  min-height:49px
+}
+.check{display:flex;align-items:flex-start;gap:10px;font-weight:normal}
+.check input{width:21px;height:21px;flex-shrink:0;margin-top:5px}
+.notice{
+  padding:14px;background:#fff4db;border-radius:13px;
+  font-size:14px;color:#655538;margin:15px 0
+}
+.error{color:#a32042;font-weight:bold}
+.profile-hero{text-align:center;background:linear-gradient(130deg,#fbe2eb,#eee7ff)}
+.profile-hero .avatar{width:100px;height:100px;font-size:55px;margin:auto}
+.pill{
+  display:inline-block;background:#fff0d6;color:#795619;
+  border-radius:20px;padding:6px 12px;font-size:13px;font-weight:bold
+}
+.chat-layout{
+  display:grid;grid-template-columns:200px minmax(0,1fr);
+  padding:0;overflow:hidden;min-height:420px
+}
+.contacts{padding:14px;background:#faf7ff;border-right:1px solid #eee5f3}
+.contact{
+  width:100%;border:0;border-radius:12px;background:transparent;
+  text-align:left;padding:10px;display:flex;gap:9px;align-items:center
+}
+.contact.active,.contact:hover{background:#eae1fa}
+.contact .avatar{width:40px;height:40px;font-size:22px}
+.conversation{display:flex;flex-direction:column;min-width:0}
+.chat-head{padding:15px;border-bottom:1px solid #eee5f3;display:flex;align-items:center;gap:10px}
+.chat-head div:nth-child(2){flex:1}
+.chat-head strong,.chat-head small{display:block}
+.chat-head small{color:#7a6e85}
+.messages{
+  flex:1;min-height:240px;max-height:360px;overflow-y:auto;
+  padding:17px;background:#fffdfd;display:flex;flex-direction:column;gap:10px
+}
+.bubble{
+  max-width:85%;padding:12px 15px;border-radius:16px;
+  background:#eee6ff;align-self:flex-start;overflow-wrap:anywhere
+}
+.bubble.mine{background:#fbe0e9;align-self:flex-end}
+.chat-form{display:flex;gap:8px;padding:12px;border-top:1px solid #eee5f3}
+.chat-form input{min-width:0}
+.chat-form button{flex-shrink:0}
+.call-box{
+  text-align:center;padding:30px 20px;
+  background:linear-gradient(140deg,#fce4ed,#eee7ff)
+}
+.call-avatar{
+  margin:10px auto 18px;width:130px;height:130px;
+  border-radius:50%;display:grid;place-items:center;
+  background:#ffffffa8;font-size:75px;
+  box-shadow:0 0 0 12px #ffffff50
+}
+.call-buttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.safety-item{
+  display:flex;gap:15px;padding:17px 0;
+  border-bottom:1px solid #eee5f3
+}
+.safety-item:last-child{border:0}
+.safety-icon{
+  width:48px;height:48px;flex-shrink:0;border-radius:15px;
+  display:grid;place-items:center;background:#f0e8ff;font-size:25px
+}
+.safety-item p{margin:5px 0 0;color:#756a80}
+footer{text-align:center;padding:25px;color:#7b6c88;font-size:14px}
+.hidden{display:none!important}
+.high-contrast{--text:#090511;--purple:#4c238d}
+.high-contrast .card{border:2px solid #3c2c50}
+@media(max-width:850px){
+  .layout{grid-template-columns:1fr}
+  aside{border-right:0;border-bottom:1px solid #e9def2;padding:10px}
+  .mini-profile,.side-note{display:none}
+  .nav{display:flex;overflow-x:auto}
+  .nav button{white-space:nowrap;flex-shrink:0}
+  .two-cols{grid-template-columns:1fr}
+  .hero-art{font-size:65px;min-width:80px}
+}
+@media(max-width:560px){
+  body{font-size:16px}
+  header{padding:15px}
+  .hero-art{display:none}
+  .grid{grid-template-columns:1fr}
+  .chat-layout{grid-template-columns:1fr}
+  .contacts{border-right:0;border-bottom:1px solid #eee5f3}
+  .contacts-list{display:flex;overflow:auto}
+  .contact{min-width:140px}
+  .chat-form{flex-wrap:wrap}
+  .chat-form button{width:100%}
+  .header-tools{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="logo">💗</div>
+    <div>
+      <h1>Abuelitos Connect</h1>
+      <p>Conectamos generaciones con cariño</p>
+    </div>
+  </div>
+  <div class="header-tools">
+    <button onclick="cambiarLetra(1)" aria-label="Aumentar letra">A+</button>
+    <button onclick="cambiarLetra(-1)" aria-label="Reducir letra">A−</button>
+    <button onclick="document.body.classList.toggle('high-contrast')">◐ Contraste</button>
+  </div>
+</header>
+
+<div class="layout">
+<aside>
+  <div class="mini-profile">
+    <div class="avatar">🌷</div>
+    <div><strong id="miniNombre">¡Hola, visitante!</strong><small>Un lugar para compartir</small></div>
+  </div>
+  <nav class="nav" aria-label="Navegación">
+    <button class="active" data-page="inicio">🏠 Inicio</button>
+    <button data-page="amigos">🌼 Amigos</button>
+    <button data-page="chat">💌 Chats</button>
+    <button data-page="llamadas">📞 Llamadas</button>
+    <button data-page="perfil">👤 Mi perfil</button>
+    <button data-page="seguridad">🛡️ Seguridad</button>
+  </nav>
+  <div class="side-note">💜 <strong>Un espacio amable</strong><br>Cuida tus datos y conversa con respeto.</div>
+</aside>
+
+<main>
+<section id="inicio" class="page active">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">UN LUGAR PARA COMPARTIR</div>
+      <h2 id="saludo">¡Qué gusto verte! 💗</h2>
+      <p>Las buenas conversaciones no tienen edad. Aquí cada historia cuenta y cada amistad florece.</p>
+      <button class="btn" onclick="irA('amigos')">🌷 Conocer amigos</button>
+    </div>
+    <div class="hero-art" aria-hidden="true">👵🏻💐</div>
+  </div>
+
+  <div class="section-title">
+    <h2>¿Qué te gustaría hacer?</h2>
+    <p>Elige una opción para comenzar.</p>
+  </div>
+  <div class="grid">
+    <button class="feature pink" onclick="irA('chat')">
+      <span class="big-icon">💌</span><strong>Mis mensajes</strong>
+      <span>Cartas, saludos y conversaciones bonitas.</span>
+    </button>
+    <button class="feature lilac" onclick="irA('llamadas')">
+      <span class="big-icon">🎥</span><strong>Videollamadas</strong>
+      <span>Una forma cercana de compartir historias.</span>
+    </button>
+    <button class="feature mint" onclick="irA('amigos')">
+      <span class="big-icon">🌻</span><strong>Buscar amigos</strong>
+      <span>Conoce personas con gustos parecidos.</span>
+    </button>
+    <button class="feature cream" onclick="irA('seguridad')">
+      <span class="big-icon">🛡️</span><strong>Mi seguridad</strong>
+      <span>Aprende a cuidar tu privacidad.</span>
+    </button>
+  </div>
+
+  <div class="two-cols">
+    <div class="card">
+      <h2>🌸 Personas que podrías conocer</h2>
+      <div id="amigosInicio"></div>
+      <button class="btn-light" onclick="irA('amigos')">Ver todos los amigos</button>
+    </div>
+    <div class="card">
+      <h2>💝 Un pequeño recordatorio</h2>
+      <p>No importa la edad: siempre hay algo nuevo que aprender y alguien con quien compartir una sonrisa.</p>
+      <div style="font-size:48px;text-align:center;padding:10px">🌷 🦋 🌼</div>
+    </div>
+  </div>
+  <div class="notice"><strong>Modo demostración:</strong> esta aplicación escolar utiliza perfiles ficticios. Las llamadas y la revisión de identidad son simuladas.</div>
+</section>
+
+<section id="registro" class="page">
+  <div class="card" style="max-width:650px;margin:auto">
+    <div style="text-align:center;font-size:55px">🌸💗🌸</div>
+    <h2>¡Crea tu perfil!</h2>
+    <p>Nos alegra que quieras formar parte de nuestra comunidad.</p>
+    <form id="formRegistro">
+      <label for="nombre">¿Cómo te llamas?</label>
+      <input id="nombre" maxlength="50" placeholder="Escribe un nombre de prueba" required>
+      <label for="edad">¿Cuántos años tienes?</label>
+      <input id="edad" type="number" min="1" max="120" placeholder="Tu edad" required>
+      <label for="tipo">Tipo de cuenta</label>
+      <select id="tipo" required>
+        <option value="">Selecciona una opción</option>
+        <option value="joven">Soy joven (17 años o más)</option>
+        <option value="mayor">Soy adulto mayor (60 años o más)</option>
+      </select>
+      <label for="gusto">¿Qué te gusta?</label>
+      <select id="gusto">
+        <option>Música</option><option>Lectura</option><option>Cocina</option>
+        <option>Jardinería</option><option>Películas</option><option>Conversar</option>
+      </select>
+      <label class="check"><input type="checkbox" id="acepto" required>
+        Acepto las reglas de convivencia de esta demostración.
+      </label>
+      <div class="notice">Usa información ficticia. No introduzcas datos reales de identificación, dirección ni teléfono.</div>
+      <button class="btn full" type="submit">💗 Crear mi perfil de prueba</button>
+      <p id="errorRegistro" class="error" role="alert"></p>
+    </form>
+  </div>
+</section>
+
+<section id="amigos" class="page">
+  <div class="hero">
+    <div><div class="eyebrow">NUEVAS CONEXIONES</div><h2>Un mundo de amistades 🌼</h2>
+    <p>Personas ficticias con historias e intereses diferentes.</p></div>
+    <div class="hero-art">🧑🏻‍🤝‍👵🏻</div>
+  </div>
+  <div class="card">
+    <label for="buscar">🔎 Buscar por nombre o interés</label>
+    <input id="buscar" placeholder="Ej. música, lectura, cocina...">
+  </div>
+  <div class="grid" id="listaAmigos" style="margin-top:18px"></div>
+</section>
+
+<section id="chat" class="page">
+  <div class="section-title"><h2>💌 Tu rincón de conversaciones</h2><p>Escribe un mensaje amable para comenzar.</p></div>
+  <div class="card chat-layout">
+    <div class="contacts">
+      <h3>Amigos</h3>
+      <div class="contacts-list" id="contactos"></div>
+    </div>
+    <div class="conversation">
+      <div class="chat-head">
+        <div class="avatar">👵🏻</div>
+        <div><strong id="nombreContacto">María Carmen</strong><small>Amiga de demostración</small></div>
+        <button class="btn-green" onclick="irA('llamadas')">☎ Llamar</button>
+      </div>
+      <div class="messages" id="mensajes" aria-live="polite">
+        <div class="bubble">¡Hola! Qué gusto conocerte. ¿Cómo estás? 🌷</div>
+      </div>
+      <form class="chat-form" id="formChat">
+        <input id="mensaje" maxlength="300" placeholder="Escribe tu mensaje..." required aria-label="Escribe tu mensaje">
+        <button class="btn" type="submit">Enviar 💌</button>
+      </form>
+      <div id="avisoChat" style="padding:0 14px;color:#6d557f" role="status"></div>
+      <div style="padding:10px 14px">
+        <button class="btn-light" onclick="notaVoz()">🎙 Simular nota de voz</button>
+        <button class="btn-light" onclick="probarFiltro()">🖼️ Probar filtro de archivos</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="llamadas" class="page">
+  <div class="hero"><div><div class="eyebrow">MANTENERSE CERCA</div>
+  <h2>Una llamada puede alegrar el día ☀️</h2>
+  <p>Elige una llamada de prueba para ver cómo funcionaría la aplicación.</p></div><div class="hero-art">📞💗</div></div>
+  <div class="card call-box">
+    <div class="call-avatar">👵🏻</div>
+    <h2>María Carmen</h2>
+    <p>Amiga de prueba · Le gusta la música y la cocina</p>
+    <div class="call-buttons">
+      <button class="btn-green" onclick="llamar('audio')">☎ Llamada de audio</button>
+      <button class="btn" onclick="llamar('video')">🎥 Videollamada</button>
+      <button class="btn-red" id="colgar" onclick="colgar()" disabled>✖ Finalizar</button>
+    </div>
+    <h3 id="estadoLlamada" role="status">¿Listo para conversar?</h3>
+    <p>🔒 No se activa tu cámara ni tu micrófono en esta demostración.</p>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>💗 Antes de llamar</h3><p>Comprueba que conoces a la persona y evita compartir información privada.</p></div>
+    <div class="card"><h3>🛡️ Tú decides</h3><p>Puedes terminar una conversación en cualquier momento si te sientes incómodo.</p></div>
+  </div>
+</section>
+
+<section id="perfil" class="page">
+  <div class="hero profile-hero">
+    <div>
+      <div class="avatar" id="avatarPerfil">🌷</div>
+      <h2 id="perfilNombre">Tu perfil</h2>
+      <p id="perfilTipo">Invitado de demostración</p>
+      <span class="pill" id="estadoVerificacion">Verificación no realizada</span>
+    </div>
+    <div class="hero-art">💐</div>
+  </div>
+  <div class="card">
+    <h2>🌸 Mi información</h2>
+    <p id="perfilEdad">Edad: no indicada</p>
+    <p id="perfilGusto">Interés favorito: Conversar</p>
+    <div class="notice"><strong>Identidad protegida:</strong> este prototipo no lee ni valida INE. Nunca subas un documento real aquí.</div>
+    <button class="btn" onclick="verificar()">🪪 Simular revisión de edad</button>
+    <p id="resultadoVerificacion" role="status"></p>
+    <button class="btn-light" onclick="irA('registro')">Editar perfil de prueba</button>
+  </div>
+</section>
+
+<section id="seguridad" class="page">
+  <div class="hero"><div><div class="eyebrow">TU TRANQUILIDAD IMPORTA</div>
+  <h2>Seguridad y confianza 🛡️</h2>
+  <p>Queremos que las conexiones sean positivas y respetuosas.</p></div><div class="hero-art">🔒💗</div></div>
+  <div class="card">
+    <div class="safety-item"><div class="safety-icon">🪪</div><div><h3>Verificación de edad</h3><p>La revisión de perfil es ficticia. Una aplicación real necesita un proveedor seguro para verificar identidad y edad con consentimiento.</p><button class="btn-light" onclick="irA('perfil')">Ver perfil</button></div></div>
+    <div class="safety-item"><div class="safety-icon">🖼️</div><div><h3>Fotos y videos seguros</h3><p>Esta demo no permite adjuntar archivos reales. Una aplicación real debe analizar los archivos antes de compartirlos.</p><button class="btn-light" onclick="probarFiltro()">Probar filtro simulado</button></div></div>
+    <div class="safety-item"><div class="safety-icon">🚩</div><div><h3>Reportar una situación</h3><p>Si alguien te incomoda, detén la conversación y busca ayuda.</p><button class="btn-light" onclick="reportar()">Simular reporte</button><p id="reporteEstado" role="status"></p></div></div>
+    <div class="safety-item"><div class="safety-icon">🔐</div><div><h3>Privacidad para jóvenes</h3><p>No compartas tu dirección, escuela, ubicación en tiempo real, contraseñas ni códigos de seguridad.</p></div></div>
+  </div>
+</section>
+
+<footer>💗 Abuelitos Connect · Conectando generaciones con respeto y cariño.<br>Prototipo escolar interactivo.</footer>
+</main>
+</div>
+
+<script>
+const amigos=[
+ {id:"maria",nombre:"María Carmen",edad:72,gusto:"Música y cocina",emoji:"👵🏻",color:"#f9dce7"},
+ {id:"jose",nombre:"Don José",edad:68,gusto:"Lectura y caminatas",emoji:"👴🏻",color:"#dff2e5"},
+ {id:"elvira",nombre:"Doña Elvira",edad:76,gusto:"Jardinería y manualidades",emoji:"👵🏽",color:"#eee5ff"},
+ {id:"ana",nombre:"Ana",edad:19,gusto:"Películas y música",emoji:"👩🏻",color:"#ffedcf"},
+ {id:"luis",nombre:"Luis",edad:22,gusto:"Música y tecnología",emoji:"👨🏻",color:"#dceefa"}
+];
+let usuario=null, contacto="maria", letra=18, llamadaActiva=false;
+const conversaciones={
+ maria:[{texto:"¡Hola! Qué gusto conocerte. ¿Cómo estás? 🌷",mio:false}],
+ jose:[{texto:"Hola, me gusta mucho leer. ¿Cuál es tu libro favorito?",mio:false}],
+ elvira:[{texto:"¡Bienvenido! Me encantan las flores. 🌼",mio:false}],
+ ana:[{texto:"¡Hola! ¿Qué películas te gustan?",mio:false}],
+ luis:[{texto:"¡Hola! ¿Qué música escuchas?",mio:false}]
+};
+function irA(id){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+ window.scrollTo({top:0,behavior:"smooth"});
+ if(id==="chat")renderChat();
+}
+document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>irA(b.dataset.page)));
+function cambiarLetra(cambio){
+ letra=Math.max(16,Math.min(25,letra+cambio));
+ document.body.style.fontSize=letra+"px";
+}
+document.getElementById("formRegistro").addEventListener("submit",e=>{
+ e.preventDefault();
+ const nombre=document.getElementById("nombre").value.trim();
+ const edad=Number(document.getElementById("edad").value);
+ const tipo=document.getElementById("tipo").value;
+ const gusto=document.getElementById("gusto").value;
+ const error=document.getElementById("errorRegistro");
+ error.textContent="";
+ if(!nombre||!Number.isInteger(edad)||edad<1||edad>120){
+  error.textContent="Escribe un nombre y una edad válida.";return;
+ }
+ if(tipo==="joven"&&edad<17){
+  error.textContent="Para esta demostración, las cuentas jóvenes requieren 17 años o más.";return;
+ }
+ if(tipo==="mayor"&&edad<60){
+  error.textContent="El perfil de adulto mayor se habilita a partir de los 60 años.";return;
+ }
+ usuario={nombre,edad,tipo,gusto,verificado:false};
+ document.getElementById("miniNombre").textContent="¡Hola, "+nombre.split(" ")[0]+"!";
+ document.getElementById("saludo").textContent="¡Qué gusto verte, "+nombre+"! 💗";
+ document.getElementById("perfilNombre").textContent=nombre;
+ document.getElementById("perfilTipo").textContent=tipo==="mayor"?"Cuenta de adulto mayor":"Cuenta joven";
+ document.getElementById("perfilEdad").textContent="Edad: "+edad+" años";
+ document.getElementById("perfilGusto").textContent="Interés favorito: "+gusto;
+ document.getElementById("avatarPerfil").textContent=tipo==="mayor"?"👵🏻":"🌷";
+ document.getElementById("estadoVerificacion").textContent="Verificación no realizada";
+ irA("inicio");
+});
+function pintarAmigos(lista,contenedor){
+ document.getElementById(contenedor).innerHTML=lista.map(a=>`
+ <div class="friend">
+  <div class="avatar" style="background:${a.color}">${a.emoji}</div>
+  <div class="friend-info"><strong>${a.nombre}</strong><small>${a.edad} años · ${a.gusto}</small></div>
+  <button class="btn-light" onclick="abrirChat('${a.id}')">Saludar</button>
+ </div>`).join("");
+}
+function renderAmigos(){
+ const q=(document.getElementById("buscar")?.value||"").toLowerCase();
+ const lista=amigos.filter(a=>(a.nombre+" "+a.gusto).toLowerCase().includes(q));
+ document.getElementById("listaAmigos").innerHTML=lista.map(a=>`
+ <div class="card" style="text-align:center;margin-top:0">
+  <div class="avatar" style="width:85px;height:85px;font-size:44px;margin:0 auto 12px;background:${a.color}">${a.emoji}</div>
+  <h3>${a.nombre}</h3><p>${a.edad} años</p><p>💗 ${a.gusto}</p>
+  <button class="btn" onclick="abrirChat('${a.id}')">💌 Enviar saludo</button>
+  <button class="btn-light" onclick="irA('llamadas')">☎ Llamar</button>
+ </div>`).join("")||"<p>No encontramos perfiles con ese interés.</p>";
+}
+function abrirChat(id){contacto=id;irA("chat");renderChat();}
+function renderChat(){
+ const a=amigos.find(x=>x.id===contacto)||amigos[0];
+ document.getElementById("contactos").innerHTML=amigos.map(p=>`
+ <button class="contact ${p.id===contacto?"active":""}" onclick="abrirChat('${p.id}')">
+  <span class="avatar" style="background:${p.color}">${p.emoji}</span><span>${p.nombre}</span>
+ </button>`).join("");
+ document.getElementById("nombreContacto").textContent=a.nombre;
+ document.getElementById("mensajes").innerHTML=(conversaciones[contacto]||[]).map(m=>
+ `<div class="bubble ${m.mio?"mine":""}">${escapar(m.texto)}</div>`).join("");
+ const caja=document.getElementById("mensajes");caja.scrollTop=caja.scrollHeight;
+}
+function escapar(texto){
+ const d=document.createElement("div");d.textContent=texto;return d.innerHTML;
+}
+document.getElementById("formChat").addEventListener("submit",e=>{
+ e.preventDefault();
+ const entrada=document.getElementById("mensaje"),texto=entrada.value.trim();
+ if(!texto)return;
+ const normal=texto.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+ const bloqueadas=["desnudo","desnuda","pornografia","contenido sexual"];
+ if(bloqueadas.some(p=>normal.includes(p))){
+  document.getElementById("avisoChat").textContent="Mensaje detenido por el filtro básico de demostración.";
+  return;
+ }
+ conversaciones[contacto].push({texto,mio:true});
+ entrada.value="";
+ document.getElementById("avisoChat").textContent="Mensaje añadido a la conversación local de prueba.";
+ renderChat();
+});
+function notaVoz(){
+ conversaciones[contacto].push({texto:"🎙️ [Nota de voz ficticia · 0:08]",mio:true});
+ renderChat();
+ document.getElementById("avisoChat").textContent="No se grabó audio real.";
+}
+function probarFiltro(){
+ alert("Filtro de demostración: no se seleccionan ni se suben archivos reales. Una versión real necesita un servicio especializado de moderación de imágenes y videos.");
+}
+function llamar(tipo){
+ llamadaActiva=true;
+ document.getElementById("estadoLlamada").textContent=
+ "📞 Llamada de "+tipo+" simulada. No se conecta a otra persona.";
+ document.getElementById("colgar").disabled=false;
+}
+function colgar(){
+ llamadaActiva=false;
+ document.getElementById("estadoLlamada").textContent="La llamada de demostración ha finalizado. 💗";
+ document.getElementById("colgar").disabled=true;
+}
+function verificar(){
+ if(!usuario){alert("Primero crea un perfil ficticio en la sección de registro.");irA("registro");return;}
+ usuario.verificado=true;
+ document.getElementById("estadoVerificacion").textContent="Verificación simulada: aprobada";
+ document.getElementById("resultadoVerificacion").textContent="Resultado ficticio: no se leyó ni verificó ninguna INE.";
+}
+function reportar(){
+ document.getElementById("reporteEstado").textContent="Reporte simulado. No se envió a un equipo de moderación.";
+}
+document.getElementById("buscar").addEventListener("input",renderAmigos);
+pintarAmigos(amigos.slice(0,3),"amigosInicio");
+renderAmigos();
+</script>
+</body>
+</html>
